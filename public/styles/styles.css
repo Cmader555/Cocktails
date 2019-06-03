@@ -60,3 +60,7 @@
   background-color: #B22222;
   color: white;
 }
+
+.adder{
+  display: flex;
+}

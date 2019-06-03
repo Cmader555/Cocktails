@@ -3,31 +3,33 @@ $("#recipeCreate").on("click", function (event) {
   console.log("you clicked make a drink!")
   event.preventDefault();
 
+
   let newRecipe = {
     name: $("#recipeName").val().trim(),
-    ingredient1: $("#ingredient1").val().trim(),
-    ingr_measure1: $("#ingr_measure1").val().trim(),
-    ingredient2: $("#ingredient2").val().trim(),
-    ingr_measure2: $("#ingr_measure2").val().trim(),
-    ingredient3: $("#ingredient3").val().trim(),
-    ingr_measure3: $("#ingr_measure3").val().trim(),
-    ingredient4: $("#ingredient4").val().trim(),
-    ingr_measure4: $("#ingr_measure4").val().trim(),
-    ingredient5: $("#ingredient4").val().trim(),
-    ingr_measure5: $("#ingr_measure5").val().trim()
+    ingredients: []
+  }
 
-  };
+  $(".adder").each(function () {
 
-  $.ajax("/api/drinks", {
-    type: "POST",
-    data: newRecipe
-  }).then(
+    let dataObj = {
+      name: $(this).children("input[name=ingredient]").val().trim(),
+      measurement: $(this).children("input[name=measurement]").val().trim()
+    }
+
+    newRecipe.ingredients.push(dataObj);
+
+  });
+  console.log(newRecipe);
+
+  $.post("/api/drinks", newRecipe).then(
     function () {
       console.log("created new drink");
       // Reload the page to get the updated list
       location.reload();
     }
   );
+
+
 
 })
 
@@ -54,4 +56,23 @@ $("#addDrink").on("click", function (event) {
   }
 
 
-}); 
+});
+
+
+
+
+
+$("#addIngredient").on("click", function (e) {
+  e.preventDefault();
+
+  let $adder = $("<div class='adder form-group'>");
+  let newInput = $(`<input placeholder="Ingredient" type="text" class="form-control" id="ingredient">`)
+  let newInputM = $(`<input placeholder="Measurement" type="text" class="form-control" id="measurement">`)
+  $adder.append(newInput, newInputM);
+
+  $("#add-drink").append($adder);
+
+
+
+})
+
