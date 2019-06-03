@@ -33,7 +33,7 @@ module.exports = function(app) {
 
   app.get("/userRecipes", function(req, res) {
    
-    db.Drinks.findAll({}).then(function (dbDrinks) {
+    db.Drinks.findAll({include: [db.Ingredients]}).then(function (dbDrinks) {
 
       console.log("dbDrinks IS EQUAL TO :", dbDrinks[0])
       

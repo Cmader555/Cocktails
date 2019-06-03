@@ -9,10 +9,10 @@
         <span>
             {{name}}
             <ul>
-                <li><span>{{ingredient1}}</span></li>
-                <li><span>{{ingredient2}}</span></li>
-                <li><span>{{ingredient3}}</span></li>
-                <li><span>{{ingredient4}}</span></li>
+                {{#each this.Ingredients}}
+                    <li>{{name}}: {{measurement}}</li>
+
+                {{/each}}
             </ul>
         </span>
 
@@ -37,28 +37,24 @@
             <span class="close">&times;</span>
         </div>
         <div class="modal-body">
-            <form>
+            <form id="add-drink">
                 <label for="recipeName">Recipe Name</label>
                 <input placeholder="Recipe Name" type="text" class="form-control" id="recipeName">
                 <br />
-
-                <input placeholder="Ingredient 1" type="text" class="form-control" id="ingredient1">
-                <input placeholder="Ingredient 1 Measurement" type="text" class="form-control" id="ingr_measure1">
-                <input placeholder="Ingredient 2" type="text" class="form-control" id="ingredient2">
-                <input placeholder="Ingredient 2 Measurement" type="text" class="form-control" id="ingr_measure2">
-                <input placeholder="Ingredient 3" type="text" class="form-control" id="ingredient3">
-                <input placeholder="Ingredient 3 Measurement" type="text" class="form-control" id="ingr_measure3">
-                <input placeholder="Ingredient 4" type="text" class="form-control" id="ingredient4">
-                <input placeholder="Ingredient 4 Measurement" type="text" class="form-control" id="ingr_measure4">
-                <input placeholder="Ingredient 5" type="text" class="form-control" id="ingredient5">
-                <input placeholder="Ingredient 5 Measurement" type="text" class="form-control" id="ingr_measure5">
-                <button type="submit" class="btn btn-success submit" id="recipeCreate">Submit</button>
+                {{!-- <span class="addToMe"></span> --}}
+                <div class="adder form-group">
+                    <input placeholder="Ingredient" type="text" class="form-control" name="ingredient">
+                    <input placeholder="Measurement" type="text" class="form-control" name="measurement">
+                </div>
             </form>
+            <button type="submit" class="btn btn-success submit" id="addIngredient">Add an ingredient!</button>
+            <button type="submit" class="btn btn-success submit" id="recipeCreate">Submit</button>
         </div>
         <div class="modal-footer"></div>
 
     </div>
 
 </div>
+
 
 
