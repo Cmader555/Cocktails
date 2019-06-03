@@ -1,0 +1,9 @@
+<h1>Home</h1>
+
+<script>
+    var isAuth = false;
+    $.get("/api/auth", function(response){
+        isAuth = response
+        //console.log(isAuth)
+    });
+</script>
