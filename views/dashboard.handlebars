@@ -1,0 +1,80 @@
+
+<section id="dashboard">
+    <div class="container">
+    {{#if profile}}
+    Hello {{fullName}} !
+    {{else}}
+        <h2>hello welcome Buzz-Happy</h2>
+        <p>Please tell us more about you!</p>
+        <form class="col s12" id="profile-form">
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input id="user-name" type="text" class="validate profile-input" name="fullName" required>
+                    <label for="user-name">Full Name</label>
+                </div>
+                
+                <div class="col s12" align="center">
+                    <a class="waves-effect waves-light btn profile disabled" disabled>update</a>
+                </div>
+            </div>
+        </form>
+    {{/if}}
+    </div>
+</section>
+<script>
+    var user = {
+        profile: true
+    }
+
+$(".profile-input").keyup( function (e) {
+    var name = e.target.name
+    var value = e.target.value
+
+    value = value.trim();
+
+    user[name] = value
+
+    enableBtns()
+})
+
+function enableBtns() {
+    /*for(key in user){
+        if(user[key].length > 0 && user[key] !== "") {
+
+        } else {
+             $(".profile").addClass("disabled").attr("disabled", true);
+        }
+    } */
+
+    if (user.fullName.length > 0 && user.fullName !== "") {
+        $(".profile").removeClass("disabled").attr("disabled", false);
+    } else {
+        $(".profile").addClass("disabled").attr("disabled", true);
+    }
+
+}
+
+$(".profile").click(function (e) {
+    e.preventDefault()
+    var isValid = $("#profile-form")[0].checkValidity()
+    if (isValid) {
+       
+       authenticateUser()
+       
+    } else {
+
+    }
+})
+
+function authenticateUser(){
+    $.ajax({
+    url: '/api/user',
+    type: 'PUT',
+    data: user,
+    success: function(result) {
+       console.log(result)
+    }
+    });
+}
+</script>

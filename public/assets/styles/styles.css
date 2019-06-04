@@ -1,0 +1,122 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  color: #002C42;
+  font-weight: 300;
+}
+
+.list-group-item {
+  line-height: 2.5;
+}
+
+.main {
+  /* min-height: calc(100vh - 130px); */
+  flex: 1 0 auto;
+}
+nav {
+  min-height: 70px;
+}
+nav, .page-footer {
+  background-color: #002C42;
+  z-index: 1;
+}
+
+h2 {
+  font-weight: 300;
+}
+
+img {
+  max-width: 100%;
+}
+nav img {
+  width: 45px;
+}
+
+nav .brand-logo {
+  top: 6px;
+}
+
+.btn {
+ background: #1ca5b9;
+ transition: 0.3s;
+}
+
+.btn:hover {
+  background: #002c42;
+}
+.spacer {
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.content {
+  background-color:rgba(216,237,242,.9);
+  border-radius: 10px;
+  padding: 5%;
+}
+
+#home {
+  background: url(../img/1.jpeg) no-repeat fixed;
+  background-size: cover;
+  height: 100%;
+  z-index: 0;
+ 
+}
+
+.content img {
+  height: 200px;
+}
+
+.modals {
+  min-height: 300px;
+  display: block;
+  position: fixed;
+  z-index: 99;
+  top: 30%;
+  left: 0;
+  right: 0;
+  background-color: #fafafa;
+  padding: 0;
+  max-height: 70%;
+  width: 55%;
+  margin: auto;
+  overflow-y: auto;
+  border-radius: 2px;
+  will-change: top, opacity;
+  -webkit-box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
+    box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
+
+}
+
+.modals .modal-content {
+  padding: 24px;
+}
+
+.modals .modal-footer {
+  border-radius: 0 0 2px 2px;
+  background-color: #fafafa;
+  padding: 4px 6px;
+  height: 56px;
+  width: 100%;
+  text-align: right;
+}
+
+.hidden {
+  display: none;
+}
+
+#signup .form-wrap {
+  width: 65%;
+  margin: 0 auto;
+}
+
+#signup {
+  background: url(../img/bkgnd.png) repeat fixed;
+  background-size: 450px;
+  height: 100%;
+  z-index: 0;
+ 
+}
