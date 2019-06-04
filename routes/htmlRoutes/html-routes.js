@@ -8,7 +8,6 @@ router.get("/", function(req, res) {
   var auth = req.isAuthenticated();
   if(auth) {
     userController.find(req, res)
-    res.render("dashboard");
   } else {
     res.render("home");
   }
@@ -27,13 +26,14 @@ router.get("/login", function(req, res) {
 });
 
 router.get("/dashboard", function(req, res) {
-  var auth = req.isAuthenticated();
-  if(!auth) return res.redirect("/");
-  userController.find(req, res)
+  // var auth = req.isAuthenticated();
+  // if(!auth) return res.redirect("/");
+  // userController.find(req, res)
+  res.render("dashboard")
 });
 
 router.get("/cocktails", function(req, res) {
-  res.render("cocktails");
+  cocktailController.findAll(req, res) 
 });
 
 

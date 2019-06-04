@@ -33,7 +33,7 @@ router.post('/login', function(req, res, next){
     
             res.cookie('user_email', user.email );
             res.cookie('authenticated', "true" );
-    
+            console.log("isLogedin")
             res.json(true)
           });
         }
@@ -71,7 +71,7 @@ router.post('/signup', function(req, res, next){
     
             res.cookie('user_email', user.email );
             res.cookie('authenticated', "true" );
-    
+            console.log("isLogedin, account created")
             return res.json(true);
           });
         }
@@ -90,7 +90,7 @@ router.get('/logout', function(req, res, next){
         res.clearCookie("user_sid");
         res.clearCookie("user_email");
         res.clearCookie("authenticated");
-
+        console.log("isLogedout")
         res.json(false);
       });
 });
@@ -100,7 +100,7 @@ router.get('/logout', function(req, res, next){
 // =====================================
 router.get('/auth', function(req, res){
     var auth = req.isAuthenticated();
-    
+    console.log("user is loggedin", auth)
     res.json(auth);
 });
 

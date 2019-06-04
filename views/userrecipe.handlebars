@@ -1,0 +1,60 @@
+<h1>User Recipes</h1>
+<!--sould be authenticated user, consider moving to dashboard-->
+<h2>Display User Recipes</h2>
+
+<ul>
+    {{#each dbDrinks}}
+
+    <li>
+        <span>
+            {{name}}
+            <ul>
+                {{#each this.Ingredients}}
+                    <li>{{name}}: {{measurement}}</li>
+
+                {{/each}}
+            </ul>
+        </span>
+
+
+    </li>
+
+    {{/each}}
+</ul>
+
+
+<button type="submit" class="btn btn-success submit" id="addDrink">Add Drink</button>
+
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Add A drink </h3>
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="add-drink">
+                <label for="recipeName">Recipe Name</label>
+                <input placeholder="Recipe Name" type="text" class="form-control" id="recipeName">
+                <br />
+                {{!-- <span class="addToMe"></span> --}}
+                <div class="adder form-group">
+                    <input placeholder="Ingredient" type="text" class="form-control" name="ingredient">
+                    <input placeholder="Measurement" type="text" class="form-control" name="measurement">
+                </div>
+            </form>
+            <button type="submit" class="btn btn-success submit" id="addIngredient">Add an ingredient!</button>
+            <button type="submit" class="btn btn-success submit" id="recipeCreate">Submit</button>
+        </div>
+        <div class="modal-footer"></div>
+
+    </div>
+
+</div>
+
+
+

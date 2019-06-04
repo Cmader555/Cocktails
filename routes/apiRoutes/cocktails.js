@@ -9,10 +9,14 @@ router.route("/")
   .put(cocktailController.update)
   .delete(cocktailController.delete);
 
-// router.route("/:id")
-//   .get(cocktailController.findOne)
-//   .put(cocktailController.updateOne)
-//   .delete(cocktailController.deleteOne);
+router.route("/:id")
+  .get(cocktailController.findOne)
+  .put(cocktailController.updateOne)
+  .delete(cocktailController.deleteOne);
     
+router.route("/all")
+  .get(cocktailController.findAll)
+  .put(cocktailController.updateAll)
+  .delete(cocktailController.deleteAll);
 
 module.exports = router;

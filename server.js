@@ -30,6 +30,11 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
+// // Routes
+// require("./routes/api-routes")(app);
+// require("./routes/html-routes")(app);
+// require("./routes/userrecipe-routes")(app); 
+
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
 if (process.env.NODE_ENV === "test") {
@@ -63,3 +68,13 @@ db.sequelize.sync(syncOptions).then(function() {
     );
   });
 });
+
+
+
+
+
+
+
+
+
+module.exports = app;
