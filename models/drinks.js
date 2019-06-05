@@ -7,13 +7,14 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1]
             }
         },
+        votes: DataTypes.INTEGER
 
     });
 
     Drinks.associate = function (models) {
 
         Drinks.hasMany(models.Ingredients, {
-            
+
         });
     };
 

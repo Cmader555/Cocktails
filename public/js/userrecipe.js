@@ -1,12 +1,15 @@
 $("#recipeCreate").on("click", function (event) {
 
-  console.log("you clicked make a drink!")
   event.preventDefault();
+  // console.log("you clicked make a drink!")
+  // console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+
 
 
   let newRecipe = {
     name: $("#recipeName").val().trim(),
-    ingredients: []
+    ingredients: [],
+    votes: 0
   }
 
   $(".adder").each(function () {
@@ -21,58 +24,102 @@ $("#recipeCreate").on("click", function (event) {
   });
   console.log(newRecipe);
 
-  $.post("/api/drinks", newRecipe).then(
+  $.post("/api/cocktail", newRecipe).then(
     function () {
       console.log("created new drink");
       // Reload the page to get the updated list
-      location.reload();
+      //location.reload();
     }
-  );
+  )
 
 
 
 })
 
 
-$("#addDrink").on("click", function (event) {
+$(document).ready(function () {
 
-  var modal = document.getElementById('myModal');
-  modal.style.display = "block";
+  $(".modal").modal();
 
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
+})
 
+// $("#addDrink").on("click", function (event) {
 
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function () {
-    modal.style.display = "none";
-  }
+//   var modal = document.getElementById('myModal');
+//   modal.style.display = "block";
 
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function (event) {
-    if (event.target === modal) {
-      modal.style.display = "none";
-    }
-  }
+//   // Get the <span> element that closes the modal
+//   var span = document.getElementsByClassName("close")[0];
 
 
-});
+//   // When the user clicks on <span> (x), close the modal
+//   span.onclick = function () {
+//     modal.style.display = "none";
+//   }
+
+//   // When the user clicks anywhere outside of the modal, close it
+//   window.onclick = function (event) {
+//     if (event.target === modal) {
+//       modal.style.display = "none";
+//     }
+//   }
+
+
+// });
 
 
 
-
+let x = 1;
 
 $("#addIngredient").on("click", function (e) {
   e.preventDefault();
 
-  let $adder = $("<div class='adder form-group'>");
-  let newInput = $(`<input placeholder="Ingredient" type="text" class="form-control" id="ingredient">`)
-  let newInputM = $(`<input placeholder="Measurement" type="text" class="form-control" id="measurement">`)
-  $adder.append(newInput, newInputM);
 
-  $("#add-drink").append($adder);
+  if (x < 20) {
 
+    x++;
+    let $adder = $("<div class='adder form-group newAdder'>");
+    let newInput = $(`<input placeholder="Ingredient" type="text" class="form-control" name="ingredient">`)
+    let newInputM = $(`<input placeholder="Measurement" type="text" class="form-control" name="measurement"> <button type="submit" class="btn btn-success submit deleteAdder">Remove</button>`)
+    $adder.append(newInput, newInputM);
 
+    $("#add-drink").append($adder);
+
+  }
 
 })
 
+
+
+$(document).on("click", ".deleteAdder", function (event) {
+
+  event.preventDefault();
+
+  $(this).parent('div').remove();
+  x--;
+
+})
+
+$(document).on("click", "#upVote", function (event) {
+  event.preventDefault();
+
+
+  id = {
+
+    id: (this.value)
+
+  };
+
+  function updateVotes(id) {
+    $.ajax({
+      method: "PUT",
+      url: "/api/cocktail",
+      data: id
+    }).then(
+
+        console.log("You clicked the upVote Button!")
+    );
+  }
+  updateVotes(id);
+
+})

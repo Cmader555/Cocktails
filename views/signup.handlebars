@@ -1,0 +1,35 @@
+<section id="signup" class="spacer">
+    <div class="container content">
+        <div align="center">
+            <img src="assets/img/cocktails2.png">
+            <h2>Buzz Happy Club!</h2>
+        </div>
+        <div class="form-wrap">
+            <div class="row">
+                <form class="col s12" id="auth-form">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="user-email" type="email" class="validate auth-input" name="email" required>
+                            <label for="user-email">Email</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">lock</i>
+                            <input id="password" type="password" class="validate auth-input" name="local_pw" required
+                                minlength="6">
+                            <label for="password">Password</label>
+                        </div>
+                        <div class="col s12" align="center">
+                            <a class="waves-effect waves-light btn auth disabled" disabled>Login</a>
+                            <a class="waves-effect waves-light btn auth disabled" disabled>Signup</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{{> modal}}
+<script src="assets/js/legalPrompt.js"></script>
+
+<script src="assets/js/auth-form.js"></script>
