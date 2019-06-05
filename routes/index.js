@@ -10,6 +10,6 @@ router.use('/api', apiRoutes);
 router.use('/', htmlRoutes);
 
 // catch all
-router.use( function(req, res){res.render("404")});
+router.use(function(req, res){res.render("404")});
 
 module.exports = router;

@@ -3,20 +3,15 @@ var cocktailController = require("../../controllers/cocktail-controller");
 
 // Matches with "/api/cocktail"
 
-router.route("/")
-  .get(cocktailController.find)
-  .post(cocktailController.create)
-  .put(cocktailController.update)
-  .delete(cocktailController.delete);
+// router.route("/api/cocktails")
+//   .post(cocktailController.create)
+//   .put(cocktailController.updateOne)
+//   .get(cocktailController.findAll)
 
-router.route("/:id")
-  .get(cocktailController.findOne)
-  .put(cocktailController.updateOne)
-  .delete(cocktailController.deleteOne);
-    
-router.route("/all")
-  .get(cocktailController.findAll)
-  .put(cocktailController.updateAll)
-  .delete(cocktailController.deleteAll);
+// router.route("/api/featuredDrinks").get(cocktailController.findFeatured)
+
+router.post("/", cocktailController.create); 
+router.put("/", cocktailController.updateOne); 
+router.get("/", cocktailController.findAll); 
 
 module.exports = router;

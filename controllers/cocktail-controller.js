@@ -2,71 +2,44 @@ const db = require("../models");
 
 // Defining methods for the UserController
 module.exports = {
-  find: function(req, res) {
-    //req.body should be an object with key and value that matches column header value
-    //ie: {category: highball} 
-    //find method in tis instamce any and all cocktails that meet criteria sent in the req.body
-    db.Cocktail
-    .find({
-      where: req.body
+
+  create: function (req, res) {
+    console.log("FUNCTION IS AT LEAST EXECuted")
+    console.log("+++++++++++++++++")
+    db.Drinks.create({
+      name: req.body.name, 
+      votes: req.body.votes
+
+    }).then(dbDrink => {
+      const ingredients = req.body.ingredients.map(ingredient => ({
+        ...ingredient,
+        DrinkId: dbDrink.id
+      }));
+      db.Ingredients.bulkCreate(ingredients);
+    });
+  },
+  updateOne: function (req, res) {
+
+    db.Drinks.update({ votes: db.sequelize.literal('votes + 1') }, { where: { id: req.body.id } });
+
+
+  },
+  findAll: function (req, res) {
+
+    db.Drinks.findAll({ include: db.Ingredients }).then(function (dbDrinks) {
+      res.json(dbDrinks);
+    });
+
+  },
+  findFeatured: function (req, res) {
+
+    db.Drinks.findAll({
+      order: [["votes", 'DESC']],
+      include: [db.Ingredients]
+    }
+    ).then(function (dbFeatured) {
+      res.json(dbFeatured);
     })
-    .then(function(dbcocktails){
-      console.log(dbcocktails)
-    }) 
-  },
-  create: function(req, res) {
-    console.log("update")
-    res.json(true) 
-  },
-  update: function(req, res) {
-    console.log("update")
-    res.json(true) 
-  },
-  delete: function(req, res) {
-    console.log("delete")
-   res.json(true) 
-  },
-  findOne: function(req, res) {
-    var id = req.params.id
-    console.log("find")
-    res.json(true)  
-  },
-  updateOne: function(req, res) {
-    var id = req.params.id
-    console.log("find")
-    res.json(true)  
-  },
-  deleteOne: function(req, res) {
-    var id = req.params.id
-    console.log("find")
-    res.json(true)  
-  },
-  findAll: function(req, res) {
-    db.Cocktail
-    .findAll()
-    .then(function(dbcocktails){
-      console.log(dbcocktails)
-      //
-      var results = {
-        cocktails: []
-      }
-      dbcocktails.forEach(function(cocktail){
-        var item = {
-          name: cocktail.name,
-          ingredience: cocktail.ingredience.split(", "),
-          //measurement: "banana, apple, "
-        }
-        results.cocktails.push(item)
-      })
-      res.render("cocktails", results)
-    })
-  },
-  updateAll: function(req, res) {
-    console.log("find")
-    res.json(true)  
-  },
-  deleteAll: function(req, res) {
-    console.log("find")
-    res.json(true)  
+
   }
 };

@@ -56,14 +56,14 @@ module.exports = function(sequelize, DataTypes) {
     };
 
     // accociations ======================
-    User.associate = function(models){
-      User.belongsToMany(models.Cocktail, {
-          through:  'favoriteDrink',
-          foreignKey: "userUUID",
-          as: "favorite",
-          onDelete: 'cascade'
-      });
-  };
+  //   User.associate = function(models){
+  //     User.belongsToMany(models.Cocktail, {
+  //         through:  'favoriteDrink',
+  //         foreignKey: "userUUID",
+  //         as: "favorite",
+  //         onDelete: 'cascade'
+  //     });
+  // };
 
   return User;
 };

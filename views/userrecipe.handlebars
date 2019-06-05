@@ -1,60 +1,101 @@
-<h1>User Recipes</h1>
-<!--sould be authenticated user, consider moving to dashboard-->
-<h2>Display User Recipes</h2>
+<section id="home" class="spacer">
 
-<ul>
-    {{#each dbDrinks}}
+    <div class="container" align="center" id="userHead">
 
-    <li>
-        <span>
-            {{name}}
-            <ul>
-                {{#each this.Ingredients}}
-                    <li>{{name}}: {{measurement}}</li>
+        <h1>Home Grown Cocktails!</h1>
 
-                {{/each}}
-            </ul>
-        </span>
+        <h4>Make a Drink!</h4>
+        <p>Click the add drink button below to create a drink recipe!</p>
+        <h4>Checkout Our Drinks!</h4>
+        <p>Scroll down and view some of the awesome drink recipes other users have made! If you like a recipe, click the
+            drink button to give it a vote!</p>
 
-
-    </li>
-
-    {{/each}}
-</ul>
-
-
-<button type="submit" class="btn btn-success submit" id="addDrink">Add Drink</button>
-
-
-
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-    <!-- Modal content -->
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3>Add A drink </h3>
-            <span class="close">&times;</span>
-        </div>
-        <div class="modal-body">
-            <form id="add-drink">
-                <label for="recipeName">Recipe Name</label>
-                <input placeholder="Recipe Name" type="text" class="form-control" id="recipeName">
-                <br />
-                {{!-- <span class="addToMe"></span> --}}
-                <div class="adder form-group">
-                    <input placeholder="Ingredient" type="text" class="form-control" name="ingredient">
-                    <input placeholder="Measurement" type="text" class="form-control" name="measurement">
-                </div>
-            </form>
-            <button type="submit" class="btn btn-success submit" id="addIngredient">Add an ingredient!</button>
-            <button type="submit" class="btn btn-success submit" id="recipeCreate">Submit</button>
-        </div>
-        <div class="modal-footer"></div>
+        <div class="divider"></div>
 
     </div>
 
-</div>
+    <div class="container">
+        <div class="row">
+            {{#each featured}}
+            <div class="col m3">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">{{name}}</span>
+                        {{#each this.Ingredients}}
+                        <p>{{name}}: {{measurement}}</p>
+                        {{/each}}
+
+
+                    </div>
+
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
 
 
 
+
+
+    <div class="container">
+        <div class="row">
+            {{#each dbDrinks}}
+            <div class="col m3">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">{{name}}</span>
+                        {{#each this.Ingredients}}
+                        <p>{{name}}: {{measurement}}</p>
+                        {{/each}}
+
+                        <button type="submit" class="btn btn-primary submit" id="upVote" value={{id}}><i
+                                class="fas fa-cocktail"></i></button>
+                    </div>
+
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+
+
+    <div class="container">
+
+        <!-- Modal Trigger -->
+
+        <a class="waves-effect waves-light btn pink darken-1 modal-trigger" href="#demo-modal">Add A Drink!</a>
+
+
+        <!-- Modal Structure -->
+
+        <div id="demo-modal" class="modal">
+
+            <div class="modal-content">
+                <form id="add-drink">
+                    <label for="recipeName">Recipe Name</label>
+                    <input placeholder="Recipe Name" type="text" class="form-control" id="recipeName">
+                    <br />
+                    {{!-- <span class="addToMe"></span> --}}
+                    <div class="adder form-group">
+                        <input placeholder="Ingredient" type="text" class="form-control" name="ingredient">
+                        <input placeholder="Measurement" type="text" class="form-control" name="measurement">
+                    </div>
+                </form>
+                <button type="submit" class="btn btn-success submit" id="addIngredient">Add an ingredient!</button>
+                <button type="submit" class="btn btn-success submit" id="recipeCreate">Create</button>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <a href="#!" class="modal-action modal-close waves-effect waves-red btn red lighten-1">Close</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</section>
