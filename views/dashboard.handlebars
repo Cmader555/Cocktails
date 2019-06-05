@@ -57,19 +57,26 @@ $(".profile-input").keyup( function (e) {
 
     value = value.trim();
 
+    if (name === "fullName") value = value.toLowerCase();
+    (name === "phoneNum") value = value;
+    (name === "city") value = value.toLowerCase();
+    (name === "state") value = value.toLowerCase();
+    (name === "country") value = value.toLowerCase();
+    (name === "birthday") value = value;
+
     user[name] = value
 
     enableBtns()
 })
 
 function enableBtns() {
-    /*for(key in user){
+    for(key in user){
         if(user[key].length > 0 && user[key] !== "") {
 
         } else {
              $(".profile").addClass("disabled").attr("disabled", true);
         }
-    } */
+    }
 
     if (user.fullName.length > 0 && user.fullName !== ""){
         $(".profile").removeClass("disabled").attr("disabled", false);
