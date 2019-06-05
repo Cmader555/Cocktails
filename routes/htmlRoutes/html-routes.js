@@ -39,7 +39,7 @@ router.get("/cocktails", function (req, res) {
     include: [db.Ingredients]
   }
   ).then(function (dbDrinks) {
-    res.render("userRecipe", {
+    res.render("userrecipe", {
       featured: dbDrinks.slice(0, 2),
       dbDrinks
     })
