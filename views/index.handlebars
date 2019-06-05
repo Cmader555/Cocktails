@@ -8,15 +8,20 @@
         <form class="clearfix mb-4" action="POST">
           <div class="form-group">
             <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
+            <input type="text" id="drinkSearch" class="form-control" aria-describedby="example-text"
+              placeholder="Enter Example Text">
           </div>
           <div class="form-group">
             <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
+            <textarea class="form-control" id="example-description" aria-describedby="example-description"
+              placeholder="Enter Example Description"></textarea>
           </div>
           <button id="submit" class="btn btn-primary float-right">Submit</button>
         </form>
         <h3>Examples:</h3>
+        <div id="examples">
+
+        </div>
         <ul id="example-list" class="list-group">
           {{#each examples}}
           <li data-id="{{this.id}}" class="list-group-item">
@@ -30,5 +35,43 @@
   </div>
 </div>
 
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
+
+<script>
+
+
+  $(document).ready(function () {
+    $("#submit").on("click", function () {
+      var input = $("#drinkSearch").val();
+      var URL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + input;
+      if (input === "") {
+        URL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita";
+      }
+      else {
+        input;
+      }
+
+      console.log(URL)
+      console.log(input);
+      $.ajax({
+
+        method: "GET",
+        url: URL
+      }).then(function (response) {
+        console.log(response.drinks[0]);
+        var drinks = response.drinks;
+
+        
+        for (var i = 0; i < drinks.length; i++) {
+          $("#examples").append("<h3>" + drinks[i].strDrink + "</h3>");
+          $("#examples").append("<p>" + drinks[i].strInstructions + "</p>");
+        }
+
+      })
+    })
+
+  })
+
+</script>

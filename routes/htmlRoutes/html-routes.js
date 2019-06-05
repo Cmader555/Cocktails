@@ -45,11 +45,12 @@ router.get("/cocktails", function (req, res) {
     })
   })
 
-  // db.Drinks.findAll({ include: [db.Ingredients] }).then(function (dbDrinks) {
+ 
+});
 
-  //   res.render("userRecipe", dbDrinks)
-
-  //     });
+router.get("/drinks", function(req, res){
+  // res.send('AXIOS');
+  res.render("index");
 });
 
 
