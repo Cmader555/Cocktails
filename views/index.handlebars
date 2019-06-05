@@ -1,56 +1,52 @@
-<div id="home">
-  <div class="container">
+<section id="home" class="spacer">
+  <div class="container" align="center" id="userHead">
     <div class="row">
-      <div class="col-8 offset-2">
+      <div class="col s12">
         <h1>{{msg}}</h1>
-        <h1>TEST4</h1>
-        <h2>This is our Home Page!</h2>
+        <h2>Search For Drinks!</h2>
         <form class="clearfix mb-4" action="POST">
           <div class="form-group">
-            <label for="example-text">Example Text</label>
             <input type="text" id="drinkSearch" class="form-control" aria-describedby="example-text"
-              placeholder="Enter Example Text">
+              placeholder="Search for your favorite Cocktails!">
           </div>
-          <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description"
-              placeholder="Enter Example Description"></textarea>
-          </div>
+          <br>
+          <br>
           <button id="submit" class="btn btn-primary float-right">Submit</button>
         </form>
-        <h3>Examples:</h3>
-        <div id="examples">
-
-        </div>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
       </div>
     </div>
   </div>
-</div>
+  <br>
+  <br>
+  <br>
+  <div class="container" align="center" id="userFeatured">
+    <h3>Cocktails:</h3>
+    <div id="examples"></div>
+  </div>
+
+
+
+
+
+</section>
 
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+
 
 <script>
 
 
   $(document).ready(function () {
-    $("#submit").on("click", function () {
+
+
+    $("#submit").on("click", function (event) {
+      event.preventDefault();
       var input = $("#drinkSearch").val();
+      console.log(input);
       var URL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + input;
       if (input === "") {
         URL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita";
-      }
-      else {
-        input;
       }
 
       console.log(URL)
@@ -63,10 +59,24 @@
         console.log(response.drinks[0]);
         var drinks = response.drinks;
 
-        
+
         for (var i = 0; i < drinks.length; i++) {
-          $("#examples").append("<h3>" + drinks[i].strDrink + "</h3>");
-          $("#examples").append("<p>" + drinks[i].strInstructions + "</p>");
+
+
+          let display = `
+            <div class="row">
+             <div class="col s12" align="center">
+              <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                    <span class="card-title">${drinks[i].strDrink}</span>
+                    <img src="${drinks[i].strDrinkThumb}" alt="Drink" height="150" width="150">
+                    <p>${drinks[i].strInstructions}</p>
+                  </div>
+                </div
+              </div>
+            </div
+          `
+          $("#examples").prepend(display);
         }
 
       })
