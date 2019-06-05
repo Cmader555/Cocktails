@@ -28,15 +28,32 @@
 
         <div class="row">
             {{#each featured}}
-            <div class="col s4">
+            <div class="col s6">
                 <div class="card blue-grey darken-1" id="featuredCards">
                     <div class="card-content white-text">
                         <span class="card-title">{{name}}</span>
-                        {{#each this.Ingredients}}
-                        <p>{{name}}: {{measurement}}</p>
-                        {{/each}}
+                        <br>
+                        <img src={{imageURL}} alt="Drink" height="150" width="150">
+                        <table class="striped centered">
+                            <thead>
+                                <tr>
+                                    <th>Ingredient</th>
+                                    <th>Measurement</th>
+                                </tr>
 
-
+                            </thead>
+                            <tbody>
+                                {{#each this.Ingredients}}
+                                <tr>
+                                    <td>{{name}}</td>
+                                    <td>{{measurement}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                        <br>
+                        <p>{{description}}</p>
+                        
                     </div>
 
                 </div>
@@ -62,6 +79,8 @@
                 <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
                         <span class="card-title">{{name}}</span>
+                        <br>
+                        <img src={{imageURL}} alt="Drink" height="150" width="150">
                         <table class="striped centered">
                             <thead>
                                 <tr>
@@ -79,6 +98,8 @@
                                 {{/each}}
                             </tbody>
                         </table>
+                        <br>
+                        <p>{{description}}</p>
                         <br>
                         <button type="submit" class="btn btn-primary submit" id="upVote" value={{id}}><i
                                 class="fas fa-cocktail"></i></button>
@@ -105,6 +126,8 @@
             <div class="modal-content">
                 <form id="add-drink">
                     <input placeholder="Recipe Name" type="text" class="form-control" id="recipeName">
+                    <input placeholder="Drink Image URL" type="text" class="form-control" id="imageURL">
+                    <textarea placeholder="Describe how to concoct your cocktail" rows="4" cols="50" name="comment" form="usrform" id="description"></textarea>
                     <br>
                     <br>
                     <div class="adder form-group">

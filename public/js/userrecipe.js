@@ -9,7 +9,9 @@ $("#recipeCreate").on("click", function (event) {
   let newRecipe = {
     name: $("#recipeName").val().trim(),
     ingredients: [],
-    votes: 0
+    votes: 0, 
+    imageURL: $("#imageURL").val().trim(), 
+    description: $("#description").val().trim()
   }
 
   $(".adder").each(function () {
