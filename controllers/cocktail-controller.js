@@ -8,7 +8,9 @@ module.exports = {
     console.log("+++++++++++++++++")
     db.Drinks.create({
       name: req.body.name, 
-      votes: req.body.votes
+      votes: req.body.votes, 
+      imageURL: req.body.imageURL, 
+      description: req.body.description
 
     }).then(dbDrink => {
       const ingredients = req.body.ingredients.map(ingredient => ({

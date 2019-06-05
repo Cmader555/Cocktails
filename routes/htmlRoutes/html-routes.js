@@ -40,7 +40,7 @@ router.get("/cocktails", function (req, res) {
   }
   ).then(function (dbDrinks) {
     res.render("userRecipe", {
-      featured: dbDrinks.slice(0, 3),
+      featured: dbDrinks.slice(0, 2),
       dbDrinks
     })
   })
