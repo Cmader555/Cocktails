@@ -80,7 +80,7 @@ $("#addIngredient").on("click", function (e) {
     x++;
     let $adder = $("<div class='adder form-group newAdder'>");
     let newInput = $(`<input placeholder="Ingredient" type="text" class="form-control" name="ingredient">`)
-    let newInputM = $(`<input placeholder="Measurement" type="text" class="form-control" name="measurement"> <button type="submit" class="btn btn-success submit deleteAdder">Remove</button>`)
+    let newInputM = $(`<input placeholder="Measurement" type="text" class="form-control" name="measurement"> <button type="submit" class="btn btn-success submit deleteAdder">Remove</button> <br>`)
     $adder.append(newInput, newInputM);
 
     $("#add-drink").append($adder);

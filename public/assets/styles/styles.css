@@ -16,9 +16,11 @@ body {
   /* min-height: calc(100vh - 130px); */
   flex: 1 0 auto;
 }
+
 nav {
   min-height: 70px;
 }
+
 nav, .page-footer {
   background-color: #002C42;
   z-index: 1;
@@ -31,6 +33,7 @@ h2 {
 img {
   max-width: 100%;
 }
+
 nav img {
   width: 45px;
 }
@@ -40,20 +43,21 @@ nav .brand-logo {
 }
 
 .btn {
- background: #1ca5b9;
- transition: 0.3s;
+  background: #1ca5b9;
+  transition: 0.3s;
 }
 
 .btn:hover {
   background: #002c42;
 }
+
 .spacer {
   padding-top: 5%;
   padding-bottom: 5%;
 }
 
 .content {
-  background-color:rgba(216,237,242,.9);
+  background-color: rgba(216, 237, 242, .9);
   border-radius: 10px;
   padding: 5%;
 }
@@ -63,7 +67,6 @@ nav .brand-logo {
   background-size: cover;
   height: 100%;
   z-index: 0;
- 
 }
 
 .content img {
@@ -86,9 +89,8 @@ nav .brand-logo {
   overflow-y: auto;
   border-radius: 2px;
   will-change: top, opacity;
-  -webkit-box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
-    box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
-
+  -webkit-box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
 }
 
 .modals .modal-content {
@@ -118,13 +120,24 @@ nav .brand-logo {
   background-size: 450px;
   height: 100%;
   z-index: 0;
- 
 }
 
-#userHead{
-  background-color: #a7ffeb;
-    
-  opacity: .9; 
+#userHead {
+  background-color: rgb(167, 255, 235, .9);
   border-radius: 10px;
   padding: 5%;
+}
+
+#userFeatured {
+  background-color: rgb(77, 208, 225,.9);
+  border-radius: 10px;
+  padding: 5%;
+}
+
+#userView{
+
+  background-color: rgb(167, 255, 235, .9);
+  border-radius: 10px;
+  padding: 5%;
+
 }

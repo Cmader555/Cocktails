@@ -11,14 +11,25 @@
             drink button to give it a vote!</p>
 
         <div class="divider"></div>
+        <br>
+        <br>
+        <br>
+        <a class="waves-effect waves-light btn pink darken-1 modal-trigger" href="#demo-modal">Add A Drink!</a>
 
     </div>
+    <br>
+    <br>
+    <br>
+    <div class="container" align="center" id="userFeatured">
+        <h3>Featured Drinks</h3>
+        <p>These are the top three voted drinks, that bartenders like you have created!</p>
+        <div class="divider"></div>
+        <br>
 
-    <div class="container">
         <div class="row">
             {{#each featured}}
-            <div class="col m3">
-                <div class="card blue-grey darken-1">
+            <div class="col s4">
+                <div class="card blue-grey darken-1" id="featuredCards">
                     <div class="card-content white-text">
                         <span class="card-title">{{name}}</span>
                         {{#each this.Ingredients}}
@@ -32,31 +43,51 @@
             </div>
             {{/each}}
         </div>
+
     </div>
+    <br>
+    <br>
+    <br>
 
+    <div class="container" align="center" id="userView">
+        <h3>Homemade Cocktail Concoctions</h3>
+        <p>Checkout these drinks made by bartenders like you! If you love any of the concoctions below, then click the
+            drink to leave a vote!</p>
+        <div class="divider"></div>
+        <br>
 
-
-
-
-    <div class="container">
+        {{#each dbDrinks}}
         <div class="row">
-            {{#each dbDrinks}}
-            <div class="col m3">
+            <div class="col s12" align="center">
                 <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
                         <span class="card-title">{{name}}</span>
-                        {{#each this.Ingredients}}
-                        <p>{{name}}: {{measurement}}</p>
-                        {{/each}}
+                        <table class="striped centered">
+                            <thead>
+                                <tr>
+                                    <th>Ingredient</th>
+                                    <th>Measurement</th>
+                                </tr>
 
+                            </thead>
+                            <tbody>
+                                {{#each this.Ingredients}}
+                                <tr>
+                                    <td>{{name}}</td>
+                                    <td>{{measurement}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                        <br>
                         <button type="submit" class="btn btn-primary submit" id="upVote" value={{id}}><i
                                 class="fas fa-cocktail"></i></button>
                     </div>
 
                 </div>
             </div>
-            {{/each}}
         </div>
+        {{/each}}
     </div>
 
 
@@ -64,7 +95,7 @@
 
         <!-- Modal Trigger -->
 
-        <a class="waves-effect waves-light btn pink darken-1 modal-trigger" href="#demo-modal">Add A Drink!</a>
+
 
 
         <!-- Modal Structure -->
@@ -73,15 +104,16 @@
 
             <div class="modal-content">
                 <form id="add-drink">
-                    <label for="recipeName">Recipe Name</label>
                     <input placeholder="Recipe Name" type="text" class="form-control" id="recipeName">
-                    <br />
-                    {{!-- <span class="addToMe"></span> --}}
+                    <br>
+                    <br>
                     <div class="adder form-group">
                         <input placeholder="Ingredient" type="text" class="form-control" name="ingredient">
                         <input placeholder="Measurement" type="text" class="form-control" name="measurement">
                     </div>
+                    <br>
                 </form>
+                <br>
                 <button type="submit" class="btn btn-success submit" id="addIngredient">Add an ingredient!</button>
                 <button type="submit" class="btn btn-success submit" id="recipeCreate">Create</button>
 
