@@ -1,9 +1,13 @@
-
 <section id="dashboard">
     <div class="container">
         <div id="profile-data" {{#if profile}} {{else}}class="hide"{{/if}}>
-            <h2>Hello <span id="fullName">{{fullName}}</span></h2>
-            <p id="birthday">{{birthday}}</p>
+            <h3>Cheers Buzz Happy Club Member: <span id="fullName">{{fullName}}!</span></h3>
+            <p id="birthday">Birthday: {{birthday}}</p>
+            <p id="phoneNum">Phone: {{phoneNum}}</p>
+            <p id="city">City: {{city}}</p>
+            <p id="state">State: {{state}}</p>
+            <p id="country">Country: {{country}}</p>
+            
         </div> 
     {{#unless profile}}
         <div>
@@ -50,79 +54,9 @@
     {{/unless}}
     </div>
 </section>
-{{!-- external js file link here --}}
-{{!-- cut everything inside script tag and put in an external js file to be loaded above --}}
+<script src="assets/js/dashboard.js"></script>
 <script>
-    var user = {
-        profile: true,
-        birthday: null,
-        fullName: null,
-        city: null,
-        state: null,
-        country: null,
-        phoneNum: null
-    }
 
-
-$(".profile-input").keyup( function (e) {
-    var name = e.target.name
-    var value = e.target.value
-
-    value = value.trim();
-
-    if(name === "fullName") value = value.toLowerCase();
-    if(name === "phoneNum") value = value;
-    if(name === "city") value = value.toLowerCase();
-    if(name === "state") value = value.toLowerCase();
-    if(name === "country") value = value.toLowerCase();
-    if(name === "birthday") {
-        value = moment(value).format("MM/DD/YYYY")
-    }
-
-    user[name] = value
-
-    enableBtns()
-})
-
-function enableBtns() {
-    var count = 0;
-    for(key in user){
-        if(user[key] !== null) {
-           count++;
-        } else {
-             $(".profile").addClass("disabled").attr("disabled", true);
-        }
-    }
-
-    if(count === 7) {
-        $(".profile").removeClass("disabled").attr("disabled", false);
-    }
-
-}
-
-$(".profile").click(function (e) {
-    e.preventDefault()
-    var isValid = $("#profile-form")[0].checkValidity()
-    if (isValid) {
-       
-       authenticateUser()
-       
-    } else {
-
-    }
-})
-
-function authenticateUser(){
-    $.ajax({
-    url: '/api/user',
-    type: 'PUT',
-    data: user,
-    success: function(result) {
-        $("#profile-form").addClass("hide");
-        $("#fullName").text(user.fullName);
-        $("#birthday").text(user.birthday);
-        $("#profile-data").removeClass("hide")
-    }
-    });
-}
+    var month = moment().format("MMMM YYYY");
+    $("#month").text(month)
 </script>
