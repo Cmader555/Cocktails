@@ -1,55 +1,68 @@
 
 <section id="dashboard">
     <div class="container">
-    {{#if profile}}
-    Hello {{fullName}} !
-    {{else}}
-        <h2>Hello Welcome to Buzz Happy</h2>
-        <p>Please tell us more about you!</p>
-        <form class="col s12" id="profile-form">
-            <div class="row">
-                <div class="input-field col s6">
-                    <i class="material-icons prefix">account_circle</i>
-                    <input id="user-name" type="text" class="validate profile-input" name="fullName" required>
-                    <label for="user-name">Full Name</label>
+        <div id="profile-data" {{#if profile}} {{else}}class="hide"{{/if}}>
+            <h2>Hello <span id="fullName">{{fullName}}</span></h2>
+            <p id="birthday">{{birthday}}</p>
+        </div> 
+    {{#unless profile}}
+        <div>
+            <form class="col s12" id="profile-form">
+                <h2>Hello Welcome to Buzz Happy</h2>
+                <p>Please tell us more about you!</p>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="user-name" type="text" class="validate profile-input" name="fullName" required value={{fullName}}>
+                        <label for="user-name">Full Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">phone_iphone</i>
+                        <input id="user-phone" type="tel" class="validate profile-input" phone="phoneNum" required>
+                        <label for="user-phone">Phone Number</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <i class="material-icons prefix">place</i>
+                        <input id="user-city" type="text" class="validate profile-input" name="city" required>
+                        <label for="user-city">City</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <i class="material-icons prefix">pin_drop</i>
+                        <input id="user-state" type="text" class="validate profile-input" name="state" required>
+                        <label for="user-state">State</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <i class="material-icons prefix">public</i>
+                        <input id="user-country" type="text" class="validate profile-input" name="country" required>
+                        <label for="user-country">Country</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <i class="material-icons prefix">date_range</i>
+                        <input id="user-birthday" type="text" class="validate profile-input" name="birthday" required>
+                        <label for="user-birthday">Birthday (MM/DD/YYYY)</label>
+                    </div>                      
+                    <div class="col s12" align="center">
+                        <a class="waves-effect waves-light btn profile disabled" disabled>update</a>
+                    </div>
                 </div>
-                <div class="input-field col s6">
-                    <i class="material-icons prefix">phone_iphone</i>
-                    <input id="user-phone" type="text" class="validate profile-input" phone="phoneNum" required>
-                    <label for="user-phone">Phone Number</label>
-                </div>
-                <div class="input-field col s3">
-                    <i class="material-icons prefix">place</i>
-                    <input id="user-city" type="text" class="validate profile-input" city="city" required>
-                    <label for="user-city">City</label>
-                </div>
-                <div class="input-field col s3">
-                    <i class="material-icons prefix">pin_drop</i>
-                    <input id="user-state" type="text" class="validate profile-input" state="state" required>
-                    <label for="user-state">State</label>
-                </div>
-                <div class="input-field col s3">
-                    <i class="material-icons prefix">public</i>
-                    <input id="user-country" type="text" class="validate profile-input" country="country" required>
-                    <label for="user-country">Country</label>
-                </div>
-                <div class="input-field col s3">
-                    <i class="material-icons prefix">date_range</i>
-                    <input id="user-birthday" type="text" class="validate profile-input" birthday="birthday" required>
-                    <label for="user-birthday">Birthday</label>
-                </div>                      
-                <div class="col s12" align="center">
-                    <a class="waves-effect waves-light btn profile disabled" disabled>update</a>
-                </div>
-            </div>
-        </form>
-    {{/if}}
+            </form>
+        </div>
+    {{/unless}}
     </div>
 </section>
+{{!-- external js file link here --}}
+{{!-- cut everything inside script tag and put in an external js file to be loaded above --}}
 <script>
     var user = {
-        profile: true
+        profile: true,
+        birthday: null,
+        fullName: null,
+        city: null,
+        state: null,
+        country: null,
+        phoneNum: null
     }
+
 
 $(".profile-input").keyup( function (e) {
     var name = e.target.name
@@ -57,12 +70,14 @@ $(".profile-input").keyup( function (e) {
 
     value = value.trim();
 
-    if (name === "fullName") value = value.toLowerCase();
-    (name === "phoneNum") value = value;
-    (name === "city") value = value.toLowerCase();
-    (name === "state") value = value.toLowerCase();
-    (name === "country") value = value.toLowerCase();
-    (name === "birthday") value = value;
+    if(name === "fullName") value = value.toLowerCase();
+    if(name === "phoneNum") value = value;
+    if(name === "city") value = value.toLowerCase();
+    if(name === "state") value = value.toLowerCase();
+    if(name === "country") value = value.toLowerCase();
+    if(name === "birthday") {
+        value = moment(value).format("MM/DD/YYYY")
+    }
 
     user[name] = value
 
@@ -70,18 +85,17 @@ $(".profile-input").keyup( function (e) {
 })
 
 function enableBtns() {
+    var count = 0;
     for(key in user){
-        if(user[key].length > 0 && user[key] !== "") {
-
+        if(user[key] !== null) {
+           count++;
         } else {
              $(".profile").addClass("disabled").attr("disabled", true);
         }
     }
 
-    if (user.fullName.length > 0 && user.fullName !== ""){
+    if(count === 7) {
         $(".profile").removeClass("disabled").attr("disabled", false);
-    } else {
-        $(".profile").addClass("disabled").attr("disabled", true);
     }
 
 }
@@ -104,7 +118,10 @@ function authenticateUser(){
     type: 'PUT',
     data: user,
     success: function(result) {
-       console.log(result)
+        $("#profile-form").addClass("hide");
+        $("#fullName").text(user.fullName);
+        $("#birthday").text(user.birthday);
+        $("#profile-data").removeClass("hide")
     }
     });
 }
