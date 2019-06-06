@@ -3,12 +3,14 @@ const db = require("../models");
 // Defining methods for the UserController
 module.exports = {
   find: function(req, res) {
+    console.log(req.body)
     //user id SHOULD NEVER be sent on the front end
     //user id of the user making the requestis obtainable 
     //serverside with the following code
     //req.session.passport.user
     //this is only usable on routes where the user is logged in otherwise will get undefined
    var uuid = req.session.passport.user;
+
    db.User
     .findOne({where:{uuid: uuid}})
       .then(function(dbUser){
@@ -27,12 +29,11 @@ module.exports = {
           createdAt: dbUser.dataValues.createdAt,
           updatedAt:  dbUser.dataValues.updatedAt
         }
-
+        console.log(user)
         res.render("dashboard", user)
       })
   },
   update: function(req, res) {
-  
     var uuid = req.session.passport.user;
     db.User
       .update(req.body, {where:{uuid: uuid}})

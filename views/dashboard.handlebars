@@ -1,104 +1,62 @@
-
 <section id="dashboard">
     <div class="container">
-    {{#if profile}}
-    Hello {{fullName}} !
-    {{else}}
-        <h2>Hello Welcome to Buzz Happy</h2>
-        <p>Please tell us more about you!</p>
-        <form class="col s12" id="profile-form">
-            <div class="row">
-                <div class="input-field col s6">
-                    <i class="material-icons prefix">account_circle</i>
-                    <input id="user-name" type="text" class="validate profile-input" name="fullName" required>
-                    <label for="user-name">Full Name</label>
+        <div id="profile-data" {{#if profile}} {{else}}class="hide"{{/if}}>
+            <h3>Cheers Buzz Happy Club Member: <span id="fullName">{{fullName}}!</span></h3>
+            <p id="birthday">Birthday: {{birthday}}</p>
+            <p id="phoneNum">Phone: {{phoneNum}}</p>
+            <p id="city">City: {{city}}</p>
+            <p id="state">State: {{state}}</p>
+            <p id="country">Country: {{country}}</p>
+            
+        </div> 
+    {{#unless profile}}
+        <div>
+            <form class="col s12" id="profile-form">
+                <h2>Hello Welcome to Buzz Happy</h2>
+                <p>Please tell us more about you!</p>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="user-name" type="text" class="validate profile-input" name="fullName" required value={{fullName}}>
+                        <label for="user-name">Full Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">phone_iphone</i>
+                        <input id="user-phone" type="tel" class="validate profile-input" phone="phoneNum" required>
+                        <label for="user-phone">Phone Number</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <i class="material-icons prefix">place</i>
+                        <input id="user-city" type="text" class="validate profile-input" name="city" required>
+                        <label for="user-city">City</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <i class="material-icons prefix">pin_drop</i>
+                        <input id="user-state" type="text" class="validate profile-input" name="state" required>
+                        <label for="user-state">State</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <i class="material-icons prefix">public</i>
+                        <input id="user-country" type="text" class="validate profile-input" name="country" required>
+                        <label for="user-country">Country</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <i class="material-icons prefix">date_range</i>
+                        <input id="user-birthday" type="text" class="validate profile-input" name="birthday" required>
+                        <label for="user-birthday">Birthday (MM/DD/YYYY)</label>
+                    </div>                      
+                    <div class="col s12" align="center">
+                        <a class="waves-effect waves-light btn profile disabled" disabled>update</a>
+                    </div>
                 </div>
-                <div class="input-field col s6">
-                    <i class="material-icons prefix">phone_iphone</i>
-                    <input id="user-phone" type="text" class="validate profile-input" phone="phoneNum" required>
-                    <label for="user-phone">Phone Number</label>
-                </div>
-                <div class="input-field col s3">
-                    <i class="material-icons prefix">place</i>
-                    <input id="user-city" type="text" class="validate profile-input" city="city" required>
-                    <label for="user-city">City</label>
-                </div>
-                <div class="input-field col s3">
-                    <i class="material-icons prefix">pin_drop</i>
-                    <input id="user-state" type="text" class="validate profile-input" state="state" required>
-                    <label for="user-state">State</label>
-                </div>
-                <div class="input-field col s3">
-                    <i class="material-icons prefix">public</i>
-                    <input id="user-country" type="text" class="validate profile-input" country="country" required>
-                    <label for="user-country">Country</label>
-                </div>
-                <div class="input-field col s3">
-                    <i class="material-icons prefix">date_range</i>
-                    <input id="user-birthday" type="text" class="validate profile-input" birthday="birthday" required>
-                    <label for="user-birthday">Birthday</label>
-                </div>                      
-                <div class="col s12" align="center">
-                    <a class="waves-effect waves-light btn profile disabled" disabled>update</a>
-                </div>
-            </div>
-        </form>
-    {{/if}}
+            </form>
+        </div>
+    {{/unless}}
     </div>
 </section>
+<script src="assets/js/dashboard.js"></script>
 <script>
-    var user = {
-        profile: true
-    }
 
-$(".profile-input").keyup( function (e) {
-    var name = e.target.name
-    var value = e.target.value
-
-    value = value.trim();
-
-    user[name] = value
-
-    enableBtns()
-})
-
-function enableBtns() {
-    /*for(key in user){
-        if(user[key].length > 0 && user[key] !== "") {
-
-        } else {
-             $(".profile").addClass("disabled").attr("disabled", true);
-        }
-    } */
-
-    if (user.fullName.length > 0 && user.fullName !== ""){
-        $(".profile").removeClass("disabled").attr("disabled", false);
-    } else {
-        $(".profile").addClass("disabled").attr("disabled", true);
-    }
-
-}
-
-$(".profile").click(function (e) {
-    e.preventDefault()
-    var isValid = $("#profile-form")[0].checkValidity()
-    if (isValid) {
-       
-       authenticateUser()
-       
-    } else {
-
-    }
-})
-
-function authenticateUser(){
-    $.ajax({
-    url: '/api/user',
-    type: 'PUT',
-    data: user,
-    success: function(result) {
-       console.log(result)
-    }
-    });
-}
+    var month = moment().format("MMMM YYYY");
+    $("#month").text(month)
 </script>

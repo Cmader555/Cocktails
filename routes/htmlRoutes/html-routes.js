@@ -29,8 +29,14 @@ router.get("/signup", function (req, res) {
 router.get("/dashboard", function (req, res) {
   // var auth = req.isAuthenticated();
   // if(!auth) return res.redirect("/");
-  // userController.find(req, res)
-  res.render("dashboard")
+
+  var auth = req.isAuthenticated();
+  console.log(auth)
+  if (auth) {
+    userController.find(req, res)
+  } else {
+    res.render("dashboard");
+  }
 });
 
 router.get("/cocktails", function (req, res) {
